@@ -1,0 +1,1298 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+		.vertical1 {
+		            border-left: 3px solid black; 
+		            height: 570px; 
+		            position:absolute; 
+		            left: 54%; 
+					top: 15%; 
+					opacity: 0.4;
+		        } 
+				.horizontal1 {
+				             border-top: 3px solid black; 
+				            width: 1150px; 
+				            position:absolute; 
+				            top: 53%; 
+							left: 5%; 
+							opacity: 0.4;
+				        }
+                .vertical2 {
+		            border-left: 3px solid black;
+		            height: 610px;
+		            position:absolute;
+		            left: 54%;
+					top: 10%;
+					opacity: 0.4;
+		        }
+				.horizontal2 {
+				             border-top: 3px solid black;
+				            width: 1150px;
+				            position:absolute;
+				            top: 50%;
+							left: 5%;
+							opacity: 0.4;
+				        }
+
+    .area {
+      fill: steelblue;
+      clip-path: url(#clip);
+    }
+    .line {
+      fill: none;
+      stroke: black;
+      stroke-width: 5px;
+      opacity: 0.5;
+      clip-path: url(#clip);
+    }
+    .bar{
+      /*fill: none;*/
+      clip-path: url(#clip);
+    }
+
+    .zoom {
+      cursor: move;
+      fill: none;
+      pointer-events: all;
+    }
+
+    .handle {
+      fill: #fff;
+      stroke: #000;
+      stroke-opacity: 0.5;
+      stroke-width: 1.25px;
+    }
+
+    .grid line {
+      stroke: lightgrey;
+      stroke-opacity: 0.7;
+      shape-rendering: crispEdges;
+    }
+
+    </style>
+      <style type="text/css">
+
+          * {
+              box-sizing: border-box;
+          }
+
+          .column {
+              float: left;
+              width: 50%;
+
+              padding: 5px;
+          }
+
+          /* Clearfix (clear floats) */
+          .row_img::after {
+              content: "";
+              clear: both;
+              display: table;
+          }
+          /* Legend Font Style */
+          body {
+              font: 11px sans-serif;
+              background-color: #ffffff;
+          }
+
+          /* Legend Position Style */
+          .legend {
+              position:absolute;
+              left:20px;
+              top:30px;
+          }
+
+          .axis text {
+              font: 10px sans-serif;
+          }
+
+          .axis line, .axis path {
+              fill: none;
+              stroke: #000;
+              shape-rendering: crispEdges;
+          }
+
+          div.tooltip {
+              position: absolute;
+              text-align: center;
+              width: 60px;
+              height: 28px;
+              padding: 2px;
+              font: 12px sans-serif;
+              background: lightsteelblue;
+              border: 0px;
+              border-radius: 8px;
+              pointer-events: none;
+          }
+
+      </style>
+	
+	
+	
+    <style type="text/css">
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .column {
+            float: left;
+            width: 50%;
+
+            padding: 5px;
+        }
+
+        /* Clearfix (clear floats) */
+        .row_img::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+        /* Legend Font Style */
+        body {
+            font: 11px sans-serif;
+            background-color: #ffffff;
+        }
+
+        /* Legend Position Style */
+        .legend {
+            position:absolute;
+            left:20px;
+            top:30px;
+        }
+
+        .axis text {
+            font: 10px sans-serif;
+        }
+
+        .axis line, .axis path {
+            fill: none;
+            stroke: #000;
+            shape-rendering: crispEdges;
+        }
+
+        div.tooltip {
+            position: absolute;
+            text-align: center;
+            width: 60px;
+            height: 28px;
+            padding: 2px;
+            font: 12px sans-serif;
+            background: lightsteelblue;
+            border: 0px;
+            border-radius: 8px;
+            pointer-events: none;
+        }
+
+    </style>
+	
+	
+		
+		 <style>
+/*			 .col-6 {
+			   background-color: yellow;
+			 }*/
+			 .nav-item{
+			 	font-size: 15px;
+				font-weight: bold;
+				margin-right: 4px;
+			 }
+			 
+			 .nav-link:after {
+			     content: "|";
+			     position: absolute;
+			     top: 17px;
+			     margin-left: 8px;
+			 }
+		  </style>
+		  
+		  
+
+			 
+    <script src="static/js/main.js" type="text/javascript"></script>
+	<script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+	
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="static/css/main.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+	
+	
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <script src="https://bl.ocks.org/syntagmatic/raw/3341641/render-queue.js"></script>
+    <script src="static/js/bar_chart.js" type="text/javascript"></script>
+    <script src="static/js/ts.js" type="text/javascript"></script>
+    <script src="static/js/single_line_chart.js" type="text/javascript"></script>
+    <script src="static/js/parallel.js" type="text/javascript"></script>
+    <script src="static/js/line_chart.js" type="text/javascript"></script>
+    <script src="static/js/choropleth.js" type="text/javascript"></script>
+    <script src="static/js/line_chart1.js" type="text/javascript"></script>
+    <script src="static/js/brush_chart.js" type="text/javascript"></script>
+    <script src="static/js/scree_plot.js" type="text/javascript"></script>
+    <script src="static/js/bar_deaths.js" type="text/javascript"></script>
+    <script src="static/js/scatterplot.js" type="text/javascript"></script>
+    <script src="static/js/scatterplot_mds.js" type="text/javascript"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+
+
+</head>
+
+<body style = "background-color: #E4E7ED">
+
+	
+<div id="mySidenav" class="sidenav1">
+    <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #020940">
+	  <a class="navbar-brand" href="#">US Pollution Dashboard</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	  <div class="collapse navbar-collapse" id="navbarNav">
+	    <ul class="navbar-nav">
+
+	      <li class="nav-item c1" >
+	        <a class="nav-link" href="#">Pollutants Analysis</a>
+	      </li>
+
+			  
+		      <li class="nav-item c2" style="color:white;">
+		        <a class="nav-link" href="#">Pollutant Death Geography</a>
+		      </li>
+	      <li class="nav-item c2" style="color:white;">
+	        <a class="nav-link" href="#">Components Analysis</a>
+	      </li>
+	      
+	    </ul>
+	  </div>
+	</nav>
+	</div>
+	
+	
+
+<div></div>
+
+
+<div class="container">
+    <div class="row" id = "row_div">
+
+    </div>
+</div>
+
+
+
+<script id="page0_div" type="text/html">
+
+
+    <div class="column">
+        <img src="https://www.who.int/airpollution/infographics/Air-pollution-INFOGRAPHICS-English-4-1200px.jpg?ua=1" alt="Snow" style="width:100%">
+    </div>
+    <div class="column">
+        <img src="https://www.who.int/airpollution/infographics/Air-pollution-INFOGRAPHICS-English-1.1200px.jpg?ua=1" alt="Forest" style="width:100%">
+    </div>
+
+</div>
+
+</script>
+
+
+<script id="page1_div" type="text/html">
+	
+	<div class = "vertical1"></div> 
+	<div class = "horizontal1"></div>
+    <div class = "col-6"  >
+        <select onchange="page1();page1b();page1c();page1d()" id = "year" >
+            <option selected="selected">Year</option>
+            <option value="2016">2016</option>
+            <option value="2015">2015</option>
+            <option value="2014">2014</option>
+            <option value="2013">2013</option>
+            <option value="2012">2012</option>
+            <option value="2011">2011</option>
+            <option value="2010">2010</option>
+            <option value="2009">2009</option>
+            <option value="2008">2008</option>
+            <option value="2007">2007</option>
+            <option value="2006">2006</option>
+            <option value="2005">2005</option>
+            <option value="2004">2004</option>
+            <option value="2003">2003</option>
+            <option value="2002">2002</option>
+            <option value="2001">2001</option>
+            <option value="2000">2000</option>
+            <option value="1999">1999</option>
+        </select>
+        <select onchange="page1();page1b();page1c();page1d()" id="pollutant">
+            <option selected="selected">Pollutant</option>
+            <option value="NO2">NO2</option>
+            <option value="O3">O3</option>
+            <option value="SO2">SO2</option>
+            <option value="CO">CO</option>
+        </select>
+    </div>
+    <div class = "col-2"   ></div>
+	<div style="text-align:center; font-weight:bold; border-style: groove;" id = "cur_var">California</div>
+	
+    <div class = "col-4"   >
+        <select id="state_list"   onchange="page1d()">
+            <option selected="selected">State</option>
+            <option value="Alabama">Alabama</option>
+            <option value="Alaska">Alaska</option>
+            <option value="Arizona">Arizona</option>
+            <option value="Arkansas">Arkansas</option>
+            <option value="California">California</option>
+            <option value="Colorado">Colorado</option>
+            <option value="Connecticut">Connecticut</option>
+            <option value="Delaware">Delaware</option>
+            <option value="Florida">Florida</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Hawaii">Hawaii</option>
+            <option value="Idaho">Idaho</option>
+            <option value="Illinois">Illinois</option>
+            <option value="Indiana">Indiana</option>
+            <option value="Iowa">Iowa</option>
+            <option value="Kansas">Kansas</option>
+            <option value="Kentucky">Kentucky</option>
+            <option value="Louisiana">Louisiana</option>
+            <option value="Maine">Maine</option>
+            <option value="Maryland">Maryland</option>
+            <option value="Massachusetts">Massachusetts</option>
+            <option value="Michigan">Michigan</option>
+            <option value="Minnesota">Minnesota</option>
+            <option value="Mississippi">Mississippi</option>
+            <option value="Missouri">Missouri</option>
+            <option value="Montana">Montana</option>
+            <option value="Nebraska">Nebraska</option>
+            <option value="Nevada">Nevada</option>
+            <option value="New Hampshire">New Hampshire</option>
+            <option value="New Jersey">New Jersey</option>
+            <option value="New Mexico">New Mexico</option>
+            <option value="New York">New York</option>
+            <option value="North Carolina">North Carolina</option>
+            <option value="North Dakota">North Dakota</option>
+            <option value="Ohio">Ohio</option>
+            <option value="Oklahoma">Oklahoma</option>
+            <option value="Oregon">Oregon</option>
+            <option value="Pennsylvania">Pennsylvania</option>
+            <option value="Rhode Island">Rhode Island</option>
+            <option value="South Carolina">South Carolina</option>
+            <option value="South Dakota">South Dakota</option>
+            <option value="Tennessee">Tennessee</option>
+            <option value="Texas">Texas</option>
+            <option value="Utah">Utah</option>
+            <option value="Vermont">Vermont</option>
+            <option value="Virginia">Virginia</option>
+            <option value="Washington">Washington</option>
+            <option value="West Virginia">West Virginia</option>
+            <option value="Wisconsin">Wisconsin</option>
+            <option value="Wyoming">Wyoming</option>
+        </select>
+    </div>
+	
+	
+	<div style="width: 1660px; height: 300px;">
+		<svg width="660" height="270" style="display: block; margin: auto;"></svg>
+		
+	</div>
+	<div id = "mts"></div> 
+	
+</script>
+
+<script id="page2_div" type="text/html">
+
+    <div class = "col-6"  >
+        <select onchange="page2()" id = "popn_polln_year">
+            <option selected="selected">Year</option>
+            <option value="2015">2015</option>
+            <option value="2014">2014</option>
+            <option value="2013">2013</option>
+            <option value="2012">2012</option>
+            <option value="2011">2011</option>
+            <option value="2010">2010</option>
+            <option value="2009">2009</option>
+            <option value="2008">2008</option>
+            <option value="2007">2007</option>
+            <option value="2006">2006</option>
+            <option value="2005">2005</option>
+            <option value="2004">2004</option>
+            <option value="2003">2003</option>
+            <option value="2002">2002</option>
+            <option value="2001">2001</option>
+            <option value="2000">2000</option>
+            <option value="1999">1999</option>\
+        </select>
+    </div>
+    <div class = "col-2"   ></div>
+    <div class = "col-4"   >
+        <select id="popn_pollutant"  onchange="page2()">
+            <option selected="selected">Pollutant</option>
+            <option value="NO2">NO2</option>
+            <option value="O3">O3</option>
+            <option value="SO2">SO2</option>
+            <option value="CO">CO</option>
+        </select>
+    </div>
+</script>
+
+<script id="page3_div" type="text/html">
+    <div class = "col-6"  >
+        <select id="popn_state_list" onchange="page3a()">
+            <option selected="selected">State</option>
+            <option value="Alabama">Alabama</option>
+            <option value="Alaska">Alaska</option>
+            <option value="Arizona">Arizona</option>
+            <option value="Arkansas">Arkansas</option>
+            <option value="California">California</option>
+            <option value="Colorado">Colorado</option>
+            <option value="Connecticut">Connecticut</option>
+            <option value="Delaware">Delaware</option>
+            <!--<option value="DC">District Of Columbia</option>-->
+            <option value="Florida">Florida</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Hawaii">Hawaii</option>
+            <option value="Idaho">Idaho</option>
+            <option value="Illinois">Illinois</option>
+            <option value="Indiana">Indiana</option>
+            <option value="Iowa">Iowa</option>
+            <option value="Kansas">Kansas</option>
+            <option value="Kentucky">Kentucky</option>
+            <option value="Louisiana">Louisiana</option>
+            <option value="Maine">Maine</option>
+            <option value="Maryland">Maryland</option>
+            <option value="Massachusetts">Massachusetts</option>
+            <option value="Michigan">Michigan</option>
+            <option value="Minnesota">Minnesota</option>
+            <option value="Mississippi">Mississippi</option>
+            <option value="Missouri">Missouri</option>
+            <option value="Montana">Montana</option>
+            <option value="Nebraska">Nebraska</option>
+            <option value="Nevada">Nevada</option>
+            <option value="New Hampshire">New Hampshire</option>
+            <option value="New Jersey">New Jersey</option>
+            <option value="New Mexico">New Mexico</option>
+            <option value="New York">New York</option>
+            <option value="North Carolina">North Carolina</option>
+            <option value="North Dakota">North Dakota</option>
+            <option value="Ohio">Ohio</option>
+            <option value="Oklahoma">Oklahoma</option>
+            <option value="Oregon">Oregon</option>
+            <option value="Pennsylvania">Pennsylvania</option>
+            <option value="Rhode Island">Rhode Island</option>
+            <option value="South Carolina">South Carolina</option>
+            <option value="South Dakota">South Dakota</option>
+            <option value="Tennessee">Tennessee</option>
+            <option value="Texas">Texas</option>
+            <option value="Utah">Utah</option>
+            <option value="Vermont">Vermont</option>
+            <option value="Virginia">Virginia</option>
+            <option value="Washington">Washington</option>
+            <option value="West Virginia">West Virginia</option>
+            <option value="Wisconsin">Wisconsin</option>
+            <option value="Wyoming">Wyoming</option>
+        </select>
+        <select onchange="page3a()" id="popn_states_polln">
+            <option selected="selected">Pollutant</option>
+            <option value="NO2">NO2</option>
+            <option value="O3">O3</option>
+            <option value="SO2">SO2</option>
+            <option value="CO">CO</option>
+        </select>
+    </div>
+    <div class = "col-6"  >
+        <select id="deaths_state_list" onchange="page3b()">
+            <option selected="selected">State</option>
+            <option value="Alabama">Alabama</option>
+            <option value="Alaska">Alaska</option>
+            <option value="Arizona">Arizona</option>
+            <option value="Arkansas">Arkansas</option>
+            <option value="California">California</option>
+            <option value="Colorado">Colorado</option>
+            <option value="Connecticut">Connecticut</option>
+            <option value="Delaware">Delaware</option>
+            <!--<option value="DC">District Of Columbia</option>-->
+            <option value="Florida">Florida</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Hawaii">Hawaii</option>
+            <option value="Idaho">Idaho</option>
+            <option value="Illinois">Illinois</option>
+            <option value="Indiana">Indiana</option>
+            <option value="Iowa">Iowa</option>
+            <option value="Kansas">Kansas</option>
+            <option value="Kentucky">Kentucky</option>
+            <option value="Louisiana">Louisiana</option>
+            <option value="Maine">Maine</option>
+            <option value="Maryland">Maryland</option>
+            <option value="Massachusetts">Massachusetts</option>
+            <option value="Michigan">Michigan</option>
+            <option value="Minnesota">Minnesota</option>
+            <option value="Mississippi">Mississippi</option>
+            <option value="Missouri">Missouri</option>
+            <option value="Montana">Montana</option>
+            <option value="Nebraska">Nebraska</option>
+            <option value="Nevada">Nevada</option>
+            <option value="New Hampshire">New Hampshire</option>
+            <option value="New Jersey">New Jersey</option>
+            <option value="New Mexico">New Mexico</option>
+            <option value="New York">New York</option>
+            <option value="North Carolina">North Carolina</option>
+            <option value="North Dakota">North Dakota</option>
+            <option value="Ohio">Ohio</option>
+            <option value="Oklahoma">Oklahoma</option>
+            <option value="Oregon">Oregon</option>
+            <option value="Pennsylvania">Pennsylvania</option>
+            <option value="Rhode Island">Rhode Island</option>
+            <option value="South Carolina">South Carolina</option>
+            <option value="South Dakota">South Dakota</option>
+            <option value="Tennessee">Tennessee</option>
+            <option value="Texas">Texas</option>
+            <option value="Utah">Utah</option>
+            <option value="Vermont">Vermont</option>
+            <option value="Virginia">Virginia</option>
+            <option value="Washington">Washington</option>
+            <option value="West Virginia">West Virginia</option>
+            <option value="Wisconsin">Wisconsin</option>
+            <option value="Wyoming">Wyoming</option>
+        </select>
+        <select onchange="page3b()" id="deaths_states_polln">
+            <option selected="selected">Year</option>
+            <option value="NO2">NO2</option>
+            <option value="O3">O3</option>
+            <option value="SO2">SO2</option>
+            <option value="CO">CO</option>
+        </select>
+    </div>
+</script>
+
+<script id="page4_div" type="text/html">
+    <div class = "col-6"  >
+        <select onchange="page4()" id = "deaths_polln_year">
+            <option selected="selected">Year</option>
+            <option value="2015">2015</option>
+            <option value="2014">2014</option>
+            <option value="2013">2013</option>
+            <option value="2012">2012</option>
+            <option value="2011">2011</option>
+            <option value="2010">2010</option>
+            <option value="2009">2009</option>
+            <option value="2008">2008</option>
+            <option value="2007">2007</option>
+            <option value="2006">2006</option>
+            <option value="2005">2005</option>
+            <option value="2004">2004</option>
+            <option value="2003">2003</option>
+            <option value="2002">2002</option>
+            <option value="2001">2001</option>
+            <option value="2000">2000</option>
+            <option value="1999">1999</option>\
+        </select>
+    </div>
+    <div class = "col-2"   ></div>
+    <div class = "col-4"   >
+        <select id="deaths_pollutant"  onchange="page4()">
+            <option selected="selected">Pollutant</option>
+            <option value="NO2">NO2</option>
+            <option value="O3">O3</option>
+            <option value="SO2">SO2</option>
+            <option value="CO">CO</option>
+        </select>
+    </div>
+</script>
+
+<script id="page5_div" type="text/html">
+	<div class = "vertical2"></div> 
+	<div class = "horizontal2"></div>
+</script>
+
+<script id="page6_div" type="text/html">
+    <div class = "col-12"  >
+        <select onchange="page6()" id = "brush_year">
+<!--            <option selected="selected">Year</option>-->
+            <option selected="selected">Year</option>
+            <option value="2015">2015</option>
+            <option value="2014">2014</option>
+            <option value="2013">2013</option>
+            <option value="2012">2012</option>
+            <option value="2011">2011</option>
+            <option value="2010">2010</option>
+            <option value="2009">2009</option>
+            <option value="2008">2008</option>
+            <option value="2007">2007</option>
+            <option value="2006">2006</option>
+            <option value="2005">2005</option>
+            <option value="2004">2004</option>
+            <option value="2003">2003</option>
+            <option value="2002">2002</option>
+            <option value="2001">2001</option>
+            <option value="2000">2000</option>
+            <option value="1999">1999</option>
+        </select>
+        <select id="brush_pollutant_1"  onchange="page6()">
+            <option selected="selected">Pollutant(y)</option>
+            <option value="NO2 AQI">NO2</option>
+            <!-- <option value="O3 AQI">O3</option> -->
+            <!-- <option value="SO2 AQI">SO2</option> -->
+            <!-- <option value="CO AQI">CO</option> -->
+        </select>
+		
+        <select id="brush_pollutant_2"  onchange="page6()">
+            <option selected="selected">Pollutant(x)</option>
+            <!-- <option value="NO2 AQI">NO2</option> -->
+            <option value="O3 AQI">O3</option>
+            <option value="SO2 AQI">SO2</option>
+            <option value="CO AQI">CO</option>
+        </select>
+    </div>
+
+        <div class="col-12">
+            <div id="scatterplot"></div>
+            <div id="choropleth"></div>
+        </div>
+
+</script>
+
+
+
+
+
+</div>
+
+<script>
+    document.getElementById('row_div').innerHTML = document.getElementById('page1_div').innerHTML;
+    page1();
+    page1b();
+	page1c();
+	page1d();
+	document.getElementById("cur_var").innerHTML = "California";
+	
+
+d3.select('#mySidenav').selectAll('a').on('click', get_side_bar_option);
+
+// d3.select('#inyear').selectAll('a').on('click', function(){ update_map("year")});
+// d3.select('#inpoll').selectAll('a').on('click',function(){ update_map("poll")});
+
+
+function get_side_bar_option() {
+    // d3.selectAll('svg').remove();
+    var opt = d3.select(this).text();
+    if (opt==="Home") {
+        d3.selectAll('svg').remove();
+        d3.select('#loadings_table').remove();
+        d3.select('#parallel').remove();
+        document.getElementById('row_div').innerHTML = document.getElementById('page0_div').innerHTML;
+        $("#vert_line").css({left:"0%" ,position:"absolute"});
+        // page1();
+    }
+    if (opt==="Pollutants Analysis") {
+        d3.selectAll('svg').remove();
+        d3.select('#loadings_table').remove();
+        d3.select('#parallel').remove();
+		
+        document.getElementById('row_div').innerHTML = document.getElementById('page1_div').innerHTML;
+        $("#vert_line").css({left:"60%" ,position:"absolute"});
+		document.getElementById("cur_var").innerHTML = "California";
+		
+        page1();
+        page1b();
+		page1c();
+		page1d();
+		// page1b();
+		// page1b();
+    }
+    if (opt==="Population and pollution - USA") {
+        d3.selectAll('svg').remove();
+        d3.select('#parallel').remove();
+        d3.select('#loadings_table').remove();
+        document.getElementById('row_div').innerHTML = document.getElementById('page2_div').innerHTML;
+        $("#vert_line").css({left:"50%" ,position:"absolute"});
+        page2();
+    }
+    if (opt==="Population & Deaths VS Pollution - statewise") {
+        d3.selectAll('svg').remove();
+        d3.select('#parallel').remove();
+        d3.select('#loadings_table').remove();
+        document.getElementById('row_div').innerHTML = document.getElementById('page3_div').innerHTML;
+        $("#vert_line").css({left:"50%" ,position:"absolute"});
+        page3a();
+        page3b();
+    }
+    if (opt==="Deaths and pollution - USA") {
+        d3.selectAll('svg').remove();
+        d3.select('#parallel').remove();
+        d3.select('#loadings_table').remove();
+        document.getElementById('row_div').innerHTML = document.getElementById('page4_div').innerHTML;
+        $("#vert_line").css({left:"50%" ,position:"absolute"});
+        page4();
+    }
+    // if (opt==="Deaths and pollution - statewise") {
+    //     document.getElementById('row_div').innerHTML = document.getElementById('page5_div').innerHTML;
+    //     page5();
+    // }
+    if (opt==="Components Analysis") {
+        d3.selectAll('svg').remove();
+        d3.select('#parallel').remove();
+        d3.select('#loadings_table').remove();
+        document.getElementById('row_div').innerHTML = document.getElementById('page5_div').innerHTML;
+        $("#vert_line").css({left:"0%" ,position:"absolute"});
+        page5();
+    }
+    if (opt==="Pollutant Death Geography") {
+        d3.selectAll('svg').remove();
+        d3.select('#parallel').remove();
+        d3.select('#loadings_table').remove();
+        document.getElementById('row_div').innerHTML = document.getElementById('page6_div').innerHTML;
+      page6();
+    }
+}
+
+
+
+
+function page1() {
+	
+    d3.select('#parallel').remove();
+	
+	$('#state_list').hide();
+    d3.selectAll("#page1_svg").remove();
+    d3.select("#page1_2_svg").remove();
+	
+	d3.selectAll("svg > g > *").remove();
+	
+    var temp_yr = document.getElementById("year").value;
+    var temp_poll = document.getElementById('pollutant').value;
+
+    if (temp_yr == "Year")
+    {
+
+        temp_yr = 'none';
+        temp_poll = "NO2";
+    }
+	else if (temp_poll == 'Pollutant'){
+		temp_poll = "NO2";
+	}
+    else
+    {
+        temp_yr = document.getElementById("year").value;
+        temp_poll =document.getElementById('pollutant').value;
+    }
+
+    $.ajax({
+        url: "/us_map",
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify({ "year": temp_yr,
+            "pollutant": temp_poll})
+    }).done(function(data) {
+        // if (opt=="Pollutants analysis"){
+
+        choropleth(data)
+        // }
+
+    });
+
+	
+    var temp_st = document.getElementById("state_list").value;
+    var temp_poll = document.getElementById('pollutant').value;
+
+    if (temp_st == "State")
+    {
+
+        temp_st = 'none'//"California";
+        temp_poll = "NO2";
+    }
+else if (temp_poll == 'Pollutant'){
+	temp_poll = "NO2";
+}
+    else
+    {
+        temp_st = document.getElementById("state_list").value;
+        temp_poll =document.getElementById('pollutant').value;
+    }
+   
+}
+
+
+
+function page1b() {
+	
+	
+
+    d3.select('#singleline').remove();
+	
+    $("#vert_line").css({left:"60%" ,position:"absolute"});
+
+    var temp_st = document.getElementById("state_list").value;
+    var temp_poll = document.getElementById('pollutant').value;
+
+    if (temp_st == "State")
+    {
+
+        temp_st = "Alaska";//'none'//"California";
+        temp_poll = "NO2";
+    }
+else if (temp_poll == 'Pollutant'){
+	temp_poll = "NO2";
+}
+    else
+    {
+        temp_st = document.getElementById("state_list").value;
+        temp_poll =document.getElementById('pollutant').value;
+    }
+	
+
+    $.ajax({
+        type: 'GET',
+        url : "/overview_line_chart",
+        data: {
+            "state": temp_st,
+            "pollutant": temp_poll
+        },
+        contentType: 'application/json; charset=utf-8',
+        xhrFields: {
+            withCredentials: false
+        },
+        headers: {
+        },
+        success: function(result) {
+            result = JSON.parse(result);
+
+		// console.log('J1s')
+
+		// console.log(JSON.parse(result['dd']))
+		// console.log(JSON.parse(result['md']))
+		draw_ts_chart(JSON.parse(result['dd']),JSON.parse(result['md']),temp_st,temp_poll);
+
+        }
+    });
+}
+
+
+
+function page1c() {
+
+    d3.selectAll('#parallel').remove();
+	d3.selectAll("#page1_svg").remove();
+    // d3.selectAll('svg').remove();
+    // $("#vert_line").css({left:"60%" ,position:"absolute"});
+
+    var temp_st = document.getElementById("state_list").value;
+
+    if (temp_st == "State")
+    {
+        temp_st = "California";
+    }
+    else
+    {
+        temp_st = document.getElementById("state_list").value;
+    }
+    $.ajax({
+        type: 'GET',
+        url : "/parallel",
+        data: {
+            "state": temp_st
+        },
+        contentType: 'application/json; charset=utf-8',
+        xhrFields: {
+            withCredentials: false
+        },
+        headers: {
+        },
+        success: function(result) {
+            result = JSON.parse(result);
+            // console.log(result)
+            parallel(result)
+        }
+    });
+}
+
+
+function page1d() {
+
+   d3.select('#deaths_state').remove();
+   // d3.selectAll('svg').remove();
+    // $("#vert_line").css({left:"60%" ,position:"absolute"});
+
+    var temp_st = document.getElementById("state_list").value;
+
+    if (temp_st == "State")
+    {
+        temp_st = "California";
+    }
+    else
+    {
+        temp_st = document.getElementById("state_list").value;
+    }
+    $.ajax({
+        type: 'GET',
+        url : "/deaths_state",
+        data: {
+            "state": temp_st
+        },
+        contentType: 'application/json; charset=utf-8',
+        xhrFields: {
+            withCredentials: false
+        },
+        headers: {
+        },
+        success: function(result) {
+            result = JSON.parse(result);
+            // console.log(result)
+            deaths_state(result)
+        }
+    });
+}
+
+
+
+
+function page2() {
+    d3.selectAll('svg').remove()
+
+    // $("#hor_line").css({border: "1px solid whitesmoke", position: "absolute", 'margin-top':"500px"});
+    var temp_yr = document.getElementById("popn_polln_year").value;
+    var temp_poll = document.getElementById('popn_pollutant').value;
+
+    if (temp_yr == "Year")
+    {
+
+        temp_yr = "2015";
+        temp_poll = "SO2";
+    }
+    else
+    {
+        temp_yr = document.getElementById("popn_polln_year").value;
+        temp_poll =document.getElementById('popn_pollutant').value;
+    }
+    $.ajax({
+        url: "/popn_US_map",
+        type: "GET",
+        contentType: "application/json",
+        data: { "year": temp_yr}
+    }).done(function(data) {
+        // if (opt=="Pollutants analysis"){
+        console.log(data)
+        choropleth(data)
+        // }
+
+        $("#page1_svg").css({top:100,left:20 , position:"absolute"});
+
+    });
+
+    $.ajax({
+        type: 'GET',
+        url : "/population_pollution_US_line_chart",
+        data: {
+            "pollutant": temp_poll
+        },
+        contentType: 'application/json; charset=utf-8',
+        xhrFields: {
+            withCredentials: false
+        },
+        headers: {
+        },
+        success: function(result) {
+            result = JSON.parse(result);
+            draw_line_chart(result, temp_poll, "Population")
+            $("#double_line").css({top:100,left:720, position:"absolute"});
+        }
+    });
+}
+
+
+
+function page3a() {
+    d3.select('#double_line').remove()
+    var temp_st = document.getElementById("popn_state_list").value;
+    var temp_poll = document.getElementById('popn_states_polln').value;
+
+    if (temp_st == "State")
+    {
+
+        temp_st = "California";
+        temp_poll = "SO2";
+    }
+    else
+    {
+        temp_st = document.getElementById("popn_state_list").value;
+        temp_poll =document.getElementById('popn_states_polln').value;
+    }
+
+    $("#vert_line").css({left:"50%" ,position:"absolute"});
+    $.ajax({
+        type: 'GET',
+        url : "/population_pollution_states_line_chart",
+        data: {
+            "state": temp_st,
+            "pollutant": temp_poll
+        },
+        contentType: 'application/json; charset=utf-8',
+        xhrFields: {
+            withCredentials: false
+        },
+        headers: {
+        },
+        success: function(result) {
+            result = JSON.parse(result);
+            draw_line_chart(result, temp_poll, "Population")
+        }
+    });
+
+}
+
+function page3b()
+{
+    d3.select('#double_line1').remove()
+    var temp_st = document.getElementById("deaths_state_list").value;
+    var temp_poll = document.getElementById('deaths_states_polln').value;
+
+    if (temp_st == "State")
+    {
+
+        temp_st = "California";
+        temp_poll = "SO2";
+    }
+    else
+    {
+        temp_st = document.getElementById("deaths_state_list").value;
+        temp_poll =document.getElementById('deaths_states_polln').value;
+    }
+    $.ajax({
+        type: 'GET',
+        url : "/deaths_pollution_states_line_chart",
+        data: {
+            "state": temp_st,
+            "pollutant": temp_poll
+        },
+        contentType: 'application/json; charset=utf-8',
+        xhrFields: {
+            withCredentials: false
+        },
+        headers: {
+        },
+        success: function(result) {
+            result = JSON.parse(result);
+            draw_line_chart1(result, temp_poll, "DeathCount")
+            $("#double_line1").css({top:100,left:720, position:"absolute"});
+        }
+    });
+
+}
+
+function page4() {
+    d3.selectAll('svg').remove()
+    var temp_yr = document.getElementById("deaths_polln_year").value;
+    var temp_poll = document.getElementById('deaths_pollutant').value;
+
+    if (temp_yr == "Year")
+    {
+
+        temp_yr = "2015";
+        temp_poll = "SO2";
+    }
+    else
+    {
+        temp_yr = document.getElementById("deaths_polln_year").value;
+        temp_poll = document.getElementById('deaths_pollutant').value;
+    }
+
+    $.ajax({
+        url: "/deaths_US_map",
+        type: "GET",
+        contentType: "application/json",
+        data: { "year": temp_yr}
+    }).done(function(data) {
+        // if (opt=="Pollutants analysis"){
+        console.log(data)
+        choropleth(data)
+
+        $("#page1_svg").css({top:100,left:20 , position:"absolute"});
+        // }
+
+    });
+
+    $.ajax({
+        type: 'GET',
+        url : "/deaths_pollution_US_line_chart",
+        data: {
+            "pollutant": temp_poll
+        },
+        contentType: 'application/json; charset=utf-8',
+        xhrFields: {
+            withCredentials: false
+        },
+        headers: {
+        },
+        success: function(result) {
+            result = JSON.parse(result);
+            draw_line_chart(result, temp_poll, "DeathCount")
+            $("#double_line").css({top:100,left:720, position:"absolute"});
+        }
+    });
+}
+
+function page5() {
+    console.log("Inside page 5");
+	d3.selectAll('svg').remove()
+	$.ajax({
+            type: 'GET',
+            url : "/pca_scree_plot",
+            data: {
+            },
+            contentType: 'application/json; charset=utf-8',
+            xhrFields: {
+                withCredentials: false
+            },
+            headers: {
+            },
+            success: function(result) {
+                console.log(result)
+                result = JSON.parse(result);
+                console.log(result)
+                scree_plot(result)
+            }
+        });
+		$.ajax({
+        type: 'GET',
+        url : "/pca_loadings",
+        data: {
+        },
+        contentType: 'application/json; charset=utf-8',
+        xhrFields: {
+            withCredentials: false
+        },
+        headers: {
+        },
+        success: function(result) {
+
+            // d3.select("body").append("div").attr("id","table_loadings")
+            // d3.select("#table_loadings").innerHTML = result
+            var z = document.createElement('div') // is a node
+            z.id = 'loadings_table'
+            z.innerHTML = result;
+
+            document.body.appendChild(z);
+        }
+    });
+		$.ajax({
+            type: 'GET',
+            url : "/get_pca",
+            data: {
+            },
+            contentType: 'application/json; charset=utf-8',
+            xhrFields: {
+                withCredentials: false
+            },
+            headers: {
+            },
+            success: function(result) {
+                console.log(result)
+                result = JSON.parse(result);
+                console.log(result)
+                drawScatter(result)
+            }
+        });
+
+		$.ajax({
+            type: 'GET',
+            url : "/get_mds",
+            data: {
+            },
+            contentType: 'application/json; charset=utf-8',
+            xhrFields: {
+                withCredentials: false
+            },
+            headers: {
+            },
+            success: function(result) {
+                console.log(result)
+                result = JSON.parse(result);
+                console.log(result)
+                drawScatter_mds(result)
+            }
+        });
+
+// ("#loadings_table").css({top:100,left:720, position:"absolute"});
+
+}
+
+function page6() {
+    d3.selectAll('svg').remove();
+
+
+    var temp_yr = document.getElementById("brush_year").value;
+    var pol1 = document.getElementById("brush_pollutant_1").value;
+    var pol2 = document.getElementById("brush_pollutant_2").value;
+
+
+	if (temp_yr == "Year" && (pol1 == "Pollutant(y)" || pol2 == "Pollutant(x)")){
+        temp_yr = "2015";
+		
+		pol1 = "NO2 AQI";
+		pol2 = "O3 AQI";
+	}
+	else if (temp_yr != "Year" && (pol1 == "Pollutant(y)" || pol2 == "Pollutant(x)")){
+        // temp_yr = "2015";
+		
+		pol1 = "NO2 AQI";
+		pol2 = "O3 AQI";
+	}
+    
+	else if (temp_yr == "Year")
+	    {
+
+	        temp_yr = "2015";
+		}
+	//     pol1 = document.getElementById("brush_pollutant_1").value;
+	//     pol2 = document.getElementById("brush_pollutant_2").value;
+	//     }
+	//
+	// if ( pol2 == "Pollutant"){
+	// 	pol2 = "O3 AQI";
+	// }
+    else
+    {	
+        temp_yr = document.getElementById("brush_year").value;
+	    pol1 = document.getElementById("brush_pollutant_1").value;
+	    pol2 = document.getElementById("brush_pollutant_2").value;
+
+    }
+
+	console.log(pol1);
+	console.log(pol2);
+    $.ajax({
+        type: 'GET',
+        url : "/brush_chart",
+        data: {
+     "year": temp_yr
+        },
+        contentType: 'application/json; charset=utf-8',
+        xhrFields: {
+            withCredentials: false
+        },
+        headers: {
+        },
+        success: function(result) {
+            result = JSON.parse(result);
+            console.log(result);
+			draw_brush(result,pol1,pol2);
+            $("#scatterplot").css({top:50,left:20 , position:"absolute"});
+            $("#choropleth").css({top:50,left:700 , position:"absolute"});
+
+        }
+    });
+}
+
+</script>
+</body>
+
+</html>

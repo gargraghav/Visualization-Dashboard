@@ -1,0 +1,348 @@
+
+
+.vl {
+    border-left: 3px solid whitesmoke;
+    height: 100%;
+    position: absolute;
+    /*left: 60%;*/
+    margin-left: -3px;
+    top: 0;
+}
+
+/*#year,#pollutant, #state_list,#pollutant_2,#popn_polln_year,#popn_pollutant,#popn_state_list,#popn_states_polln,#deaths_state_list,#deaths_states_polln,#deaths_polln_year,#deaths_pollutant,#brush_year
+
+{
+    color: #08809C;
+}
+*/
+
+#pollutant {
+/*    border-left: 3px solid whitesmoke;*/
+/*    height: 100%;*/
+/*    position: absolute;*/
+    left: 80%;
+    position:absolute; 
+	
+/*    margin-left: -3px;*/
+/*    top: 0;*/
+}
+
+#cur_var
+{
+
+    left: 51%;
+    position:absolute; 
+
+}
+
+#year {
+/*    border-left: 3px solid whitesmoke;*/
+/*    height: 100%;*/
+/*    position: absolute;*/
+    left: 120%;
+    position:absolute; 
+	
+/*    margin-left: -3px;*/
+/*    top: 0;*/
+}
+
+
+
+#brush_year {
+    left: 35%;
+    position:absolute; 
+}
+#brush_pollutant_1 {
+    left: 43%;
+    position:absolute; 
+}
+#brush_pollutant_2 {
+    left: 55%;
+    position:absolute; 
+}
+
+
+.bar1 { fill: blue; }
+.bar2 { fill: deepskyblue; }
+.bar3 { fill: steelblue; }
+.bar:hover {fill: orange; }
+.axis--x path {  }
+.line_pca {
+    fill: none;
+    stroke: red;
+    stroke-width: 2;
+}
+.dot {
+    fill: red;
+    stroke: red;
+}
+
+body {
+    font-family: "Lato", sans-serif;
+    transition: background-color .5s;
+    background-color: #697f90;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+    text-decoration-line: none;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+#main {
+    transition: margin-left .5s;
+    padding: 16px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+.legend {
+    position:absolute;
+    left:20px;
+    top:30px;
+}
+
+.axis text {
+    font: 10px sans-serif;
+}
+
+.axis line, .axis path {
+    fill: none;
+    stroke: #000;
+    /*stroke: #ccc;*/
+    shape-rendering: crispEdges;
+    stroke-width: 1px;
+}
+
+
+.dropbtn {
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #2980B9;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+
+
+/*Single-line-chart*/
+
+.legend {
+    position:absolute;
+    left:20px;
+    top:30px;
+}
+
+
+.line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 2px;
+}
+
+.axisSteelBlue text{
+    fill: steelblue;
+}
+
+.axisRed text{
+    fill: red;
+}
+
+.bar { fill: steelblue; }
+
+
+/*Table loadings*/
+table {
+    border-collapse: collapse;
+    width: 28%;
+/*    height: 30%;*/
+    position: absolute;
+    left: 780px;
+    top : 400px;
+
+}
+
+th, td {
+    text-align: center;
+    padding: 3px;
+    height: 3px;
+}
+
+tr:nth-child(even){background-color: #ffffff}
+
+tr:nth-child(odd){background-color: #ffffff}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+
+
+
+
+
+
+.parcoords {
+  display: block;
+}
+
+.parcoords svg,
+.parcoords canvas {
+  font: 10px sans-serif;
+  position: absolute;
+}
+
+.parcoords canvas {
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.axis .title {
+  font-size: 10px;
+  transform: rotate(-21deg) translate(-5px,-6px);
+  fill: #222;
+}
+
+/*.axis line,*/
+/*.axis path {*/
+/*  fill: none;*/
+/*  stroke: #ccc;*/
+/*  stroke-width: 1px;*/
+/*}*/
+
+.axis .tick text {
+  fill: #222;
+  pointer-events: none;
+}
+
+.axis.pl_facility .tick text,
+.axis.pl_instrument .tick text,
+.axis.st_spstr .tick text {
+  font-size: 6px;
+}
+
+.axis.pl_telescope .tick text {
+  font-size: 5px;
+}
+
+.axis:hover line,
+.axis:hover path,
+.axis.active line,
+.axis.active path {
+  fill: none;
+  stroke: #222;
+  stroke-width: 1px;
+}
+
+.axis:hover .title {
+  font-weight: bold;
+}
+
+.axis:hover .tick text {
+  opacity: 1;
+}
+
+.axis.active .title {
+  font-weight: bold;
+}
+
+.axis.active .tick text {
+  opacity: 1;
+  font-weight: bold;
+}
+
+.brush .extent {
+  fill-opacity: .3;
+  stroke: #fff;
+  stroke-width: 1px;
+}
+
+
+.axis {
+	font: 15px sans-serif;
+}
+/*.toolTip {*/
+/*  position: absolute;*/
+/*  display: none;*/
+/*  min-width: 80px;*/
+/*  height: auto;*/
+/*  background: none repeat scroll 0 0 #ffffff;*/
+/*  border: 1px solid #6F257F;*/
+/*  padding: 14px;*/
+/*  text-align: center;*/
+/*}*/
+
+div.tooltip {
+  position: absolute;
+  text-align: center;
+  width: 60px;
+  height: 28px;
+  padding: 2px;
+  font: 12px sans-serif;
+  background: lightsteelblue;
+  border: 0px;
+  border-radius: 8px;
+  pointer-events: none;
+}
