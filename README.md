@@ -23,7 +23,7 @@ Our dashboard is divided in three tabs:
 		- Parallel Coordinates
 		- Bar Chart
 		
-**![](https://lh3.googleusercontent.com/g1IbAjDio1ruQbsB_r4Le02nlTs6Ku0uNlDeXBmdWO32IgOE0qZ7Oh2laEEYByQYZHEwSZV1OjD-Yh4ri40MfvXwI3RXeiteC4bV6oeSNjxu3MH9oQljJchZLunpab2jdfj-P0MZ =100x20)**
+**![](https://lh3.googleusercontent.com/g1IbAjDio1ruQbsB_r4Le02nlTs6Ku0uNlDeXBmdWO32IgOE0qZ7Oh2laEEYByQYZHEwSZV1OjD-Yh4ri40MfvXwI3RXeiteC4bV6oeSNjxu3MH9oQljJchZLunpab2jdfj-P0MZ)**
 -   **Pollutant Death Geography**
 	
 	- This area captures distribution of pair of pollutants and their paired effect on corresponding states over relative count of deaths.
