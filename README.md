@@ -1,6 +1,10 @@
 # US Air Pollution Dashboard
  
 This project is part of CSE 564 - Visualization Course at Stony Brook University, New York.
+
+Youtube link: [US Air Pollution Dashboard](https://www.youtube.com/watch?v=bizfcdVC090)
+
+Data: [Pollution Data](https://drive.google.com/file/d/1Ic5nCEtJISUsvcZ2hn_fu3YEEPVgkhAJ/view?usp=sharing)
  
 ### System Design
 We are using a client-server architecture:
