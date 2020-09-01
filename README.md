@@ -1,4 +1,4 @@
-# Visualization-Dashboard
+# US Air Pollution Dashboard
  
 This project is part of CSE 564 - Visualization Course at Stony Brook University, New York.
  
